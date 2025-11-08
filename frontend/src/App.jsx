@@ -1,10 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GenerateQuizTab from './tabs/GenerateQuizTab';
 import HistoryTab from './tabs/HistoryTab';
 import StatsDashboard from './components/StatsDashboard';
 import ThemeToggle from './components/ThemeToggle';
 import { useTheme } from './contexts/ThemeContext';
+import { wakeupBackend } from './utils/wakeupBackend';
 
 // Leaderboard demo data
 const leaderboardData = [
@@ -17,7 +18,24 @@ const leaderboardData = [
 
 function App() {
   const [activeTab, setActiveTab] = useState('generate');
+  const [status, setStatus] = useState("Loading...");
   const { theme } = useTheme();
+
+  // Wake up backend when app loads
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStatus("Waking up backend... this may take 20–30 seconds ⏳");
+    }, 5000);
+    
+    wakeupBackend().then(() => {
+      clearTimeout(timer);
+      setStatus("Ready!");
+      // Clear the status message after a short delay
+      setTimeout(() => setStatus(""), 3000);
+    });
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const LeaderboardTab = useCallback(() => (
     <div className="glass-panel fade-in p-6 md:p-8 rounded-2xl border border-base-300 shadow-lg bg-gradient-to-br from-base-100/80 to-base-200/80 backdrop-blur-md">
@@ -93,6 +111,16 @@ function App() {
           <p className="mt-3 text-lg text-white/90 max-w-2xl mx-auto font-light">
             Instantly transform Wikipedia articles into engaging quizzes powered by AI
           </p>
+          {/* Status message for backend wake-up */}
+          {status && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 text-sm font-medium bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 inline-block"
+            >
+              {status}
+            </motion.div>
+          )}
         </div>
       </header>
 
