@@ -25,21 +25,21 @@ async def add_security_headers(request, call_next):
 # Add CORS middleware to allow frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003", "http://localhost:3004", "http://localhost:3005", "https://ai-wiki-quiz-c0xf.onrender.com"],  # Restrict to frontend domains
+    allow_origins=["*"],  # More permissive for deployment
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Add trusted host middleware
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "0.0.0.0", "*.onrender.com"])
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 
 # Include routes
 app.include_router(quiz_router, prefix="/api")
 
 @app.get("/")
 async def root():
-    return {"message": "AI Wiki Quiz Generator API"}
+    return JSONResponse(content={"message": "AI Wiki Quiz Generator API", "status": "running"}, status_code=200)
 
 # Add a health check endpoint for Render
 @app.get("/health")
@@ -48,4 +48,5 @@ async def health_check():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    port = int(os.environ.get("PORT", 8001))
+    uvicorn.run(app, host="0.0.0.0", port=port)
