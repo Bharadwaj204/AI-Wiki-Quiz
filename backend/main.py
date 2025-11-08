@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
 
@@ -24,14 +25,14 @@ async def add_security_headers(request, call_next):
 # Add CORS middleware to allow frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003", "http://localhost:3004", "http://localhost:3005"],  # Restrict to frontend domains
+    allow_origins=["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003", "http://localhost:3004", "http://localhost:3005", "https://ai-wiki-quiz-c0xf.onrender.com"],  # Restrict to frontend domains
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Add trusted host middleware
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "0.0.0.0"])
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "0.0.0.0", "*.onrender.com"])
 
 # Include routes
 app.include_router(quiz_router, prefix="/api")
@@ -39,6 +40,11 @@ app.include_router(quiz_router, prefix="/api")
 @app.get("/")
 async def root():
     return {"message": "AI Wiki Quiz Generator API"}
+
+# Add a health check endpoint for Render
+@app.get("/health")
+async def health_check():
+    return JSONResponse(content={"status": "healthy", "message": "AI Wiki Quiz Generator is running"}, status_code=200)
 
 if __name__ == "__main__":
     import uvicorn
