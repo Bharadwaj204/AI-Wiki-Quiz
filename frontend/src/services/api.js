@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8002/api';
+const API_BASE_URL = 'https://ai-wiki-quiz-c0xf.onrender.com/api';
 
 // Helper function to safely parse JSON responses
 const safeJsonParse = (text) => {
@@ -48,7 +48,7 @@ const handleResponse = async (response) => {
 // Helper function to check if backend is reachable
 const checkBackendConnection = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/`, { method: 'HEAD', timeout: 5000 });
+    const response = await fetch(`${API_BASE_URL.replace('/api', '')}/health`, { method: 'GET', timeout: 5000 });
     return response.ok;
   } catch (error) {
     return false;
@@ -97,7 +97,7 @@ export const api = {
         // Check if backend is reachable
         const isBackendReachable = await checkBackendConnection();
         if (!isBackendReachable) {
-          throw new Error('Network error: Unable to connect to the server. Please make sure the backend server is running on port 8002.');
+          throw new Error('Network error: Unable to connect to the server. Please make sure the backend server is running.');
         } else {
           throw new Error('Network error: Unable to connect to the server. Please check your internet connection and try again.');
         }
@@ -127,7 +127,7 @@ export const api = {
         // Check if backend is reachable
         const isBackendReachable = await checkBackendConnection();
         if (!isBackendReachable) {
-          throw new Error('Network error: Unable to connect to the server. Please make sure the backend server is running on port 8002.');
+          throw new Error('Network error: Unable to connect to the server. Please make sure the backend server is running.');
         } else {
           throw new Error('Network error: Unable to connect to the server. Please check your internet connection and try again.');
         }
@@ -162,7 +162,7 @@ export const api = {
         // Check if backend is reachable
         const isBackendReachable = await checkBackendConnection();
         if (!isBackendReachable) {
-          throw new Error('Network error: Unable to connect to the server. Please make sure the backend server is running on port 8002.');
+          throw new Error('Network error: Unable to connect to the server. Please make sure the backend server is running.');
         } else {
           throw new Error('Network error: Unable to connect to the server. Please check your internet connection and try again.');
         }
