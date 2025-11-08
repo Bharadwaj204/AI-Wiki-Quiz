@@ -1,0 +1,7 @@
+{
+  // Disable online schema validation to prevent "Service Unavailable" errors
+  "json.schemaDownload.enable": false,
+  
+  // Ignore unknown @tailwind rules in CSS files
+  "css.lint.unknownAtRules": "ignore"
+}
