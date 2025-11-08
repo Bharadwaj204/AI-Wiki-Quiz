@@ -81,7 +81,12 @@ pip install -r requirements.txt
 
 ### 4. API Key Configuration
 
-Create a `.env` file in the backend directory:
+Create a `.env` file in the backend directory by copying the example:
+```bash
+cp .env.example .env
+```
+
+Or create it manually:
 ```bash
 touch .env
 ```
@@ -90,6 +95,8 @@ Add your Google Gemini API key to the `.env` file:
 ```
 GEMINI_API_KEY=your_actual_api_key_here
 ```
+
+**Important Security Note**: Never commit your actual API key to version control. The `.env` file is included in `.gitignore` to prevent accidental exposure.
 
 ### 5. Start the Backend Server
 
@@ -134,7 +141,8 @@ ai-wiki-quiz/
 │   ├── llm_quiz_generator.py # AI quiz generation
 │   ├── database.py         # Database setup
 │   ├── requirements.txt    # Python dependencies
-│   └── .env               # Environment variables (you need to create this)
+│   ├── .env.example        # Example environment variables file
+│   └── .env               # Your environment variables (not committed)
 ├── sample_data/            # Sample Wikipedia articles and quiz outputs
 ├── screenshots/            # Application screenshots
 ├── README.md              # Project overview (this file)
@@ -253,4 +261,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Google Gemini for powering the AI quiz generation
 - Wikipedia for providing the educational content
-- All the open-source libraries and tools that made this project possible#
+- All the open-source libraries and tools that made this project possible
