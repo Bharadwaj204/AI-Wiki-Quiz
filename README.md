@@ -1,6 +1,7 @@
 # AI Wiki Quiz Generator
-https://ai-wiki-quiz-1.onrender.com/
 Transform Wikipedia articles into engaging quizzes using AI.
+
+https://ai-wiki-quiz-1.onrender.com/
 
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=white)](https://reactjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.121+-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
@@ -262,4 +263,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Wikipedia for providing the educational content
 
 - All the open-source libraries and tools that made this project possible
+
 
