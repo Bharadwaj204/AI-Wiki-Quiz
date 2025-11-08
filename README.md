@@ -253,5 +253,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Google Gemini for powering the AI quiz generation
 - Wikipedia for providing the educational content
-- All the open-source libraries and tools that made this project possible#   A I - W i k i - Q u i z  
- 
+- All the open-source libraries and tools that made this project possible#
