@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
+# Removed TrustedHostMiddleware to avoid potential conflicts with Render
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
@@ -30,9 +30,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Add trusted host middleware
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 
 # Include routes
 app.include_router(quiz_router, prefix="/api")
