@@ -7,7 +7,9 @@ import os
 # Database setup - using SQLite by default, but can be changed to MySQL or PostgreSQL
 # For MySQL: mysql+pymysql://user:password@host:port/dbname
 # For PostgreSQL: postgresql+psycopg2://user:password@host:port/dbname
-DATABASE_URL = "sqlite:///./quiz_history.db"
+
+# Use environment variable for database URL, fallback to SQLite
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./quiz_history.db")
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
