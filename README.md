@@ -23,7 +23,6 @@ Transform Wikipedia articles into engaging quizzes using AI.
 
 ## 📋 Prerequisites
 
-- **Node.js** (version 16 or higher)
 - **Python** (version 3.8 or higher)
 - **npm** (comes with Node.js)
 - **Google Gemini API Key** (free from [Google AI Studio](https://aistudio.google.com/))
@@ -261,4 +260,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Google Gemini for powering the AI quiz generation
 - Wikipedia for providing the educational content
+
 - All the open-source libraries and tools that made this project possible
